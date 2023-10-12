@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { IoMdSend } from "react-icons/io";
 
 export default function SearchForm() {
   return (
@@ -7,14 +8,17 @@ export default function SearchForm() {
       {/*Search option */}
       <div className='bg-gray-100 fixed bottom-0 left-0 right-0 lg:flex lg:items-center lg:flex-col lg:justify-center lg:ml-[20%] lg:w-[80%]'>
         <div className='px-[2rem] lg:px-0 lg:w-[50%]'>
-          <form>
-            <div>
+          <form action='submit'>
+            <div className='mt-5 flex shadow-lg justify-between px-3 items-center border-2 bg-gray-200 text-gray-900 rounded-[.8rem]'>
               <input
-                className='w-full shadow-lg bg-gray-200 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-indigo-400'
+                className='w-full bg-gray-200 text-gray-900 p-3 focus:outline-none'
                 type='text'
                 placeholder='Send a message'
                 required
               />
+              <button>
+                <IoMdSend size={25} className='text-gray-900/50' />
+              </button>
             </div>
           </form>
         </div>
