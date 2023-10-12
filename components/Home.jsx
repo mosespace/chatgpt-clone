@@ -6,8 +6,9 @@ import Profile from "../public/profile.jpg";
 import { FaLock } from "react-icons/fa";
 import React, { useState } from "react";
 import { ImPower } from "react-icons/im";
-import { SlLike, SlDislike } from "react-icons/sl";
+import { SlLike, SlDislike, SlShareAlt } from "react-icons/sl";
 import { GoPaste } from "react-icons/go";
+import { CiShare1 } from "react-icons/ci";
 import { BsFillInfoCircleFill, BsStars } from "react-icons/bs";
 
 export default function Answers() {
@@ -49,6 +50,16 @@ export default function Answers() {
       </> */}
 
       {/*Response Section */}
+      <di className='bg-gray-200/60 w-full lg:absolute lg:z-50 lg:top-0 lg:w-[80%] border-2'>
+        <div className='flex justify-between py-[1rem] w-full px-[2rem]'>
+          <div className='hidden lg:block opacity-0 '>Hidden</div>
+          <span>Default (GPT-3.5)</span>
+          <button>
+            <CiShare1 size={25} />
+          </button>
+        </div>
+      </di>
+
       <div className='mt-[2rem] gap-6 flex flex-col justify-between items-center w-full'>
         {/*Question */}
         <div className='flex gap-[1rem] lg:justify-normal justify-between py-[.6rem] w-full font-bold px-[2rem] lg:w-[60%]'>
@@ -63,13 +74,13 @@ export default function Answers() {
         </div>
 
         {/*Answer  */}
-        <div className='bg-gray-200/60 w-full flex justify-center items-start gap-1'>
+        <div className='bg-gray-200/60 w-full flex justify-center items-start gap-1 border-2'>
           <div className='flex gap-[1rem] items-start lg:justify-normal justify-center py-[1rem] w-full px-[2rem] lg:w-[60%] place-items-center'>
             <div className='relative max-w-[50px] lg:max-w-[55px] max-h-[40px] lg:max-h-[55px]'>
               <Image src={Logo} alt='AI ChatGPT-4' />
             </div>
             <div className='text-left' style={{ flex: 1 }}>
-              <h2 className='text-left text-[1rem]'>
+              <h2 className='text-left text-[1rem] selection:bg-[#0071bc]/70 selection:text-white'>
                 I'd be happy to help you get started with Next.js! Next.js is a
                 popular framework for building React applications, and it's
                 known for its performance, SEO-friendliness, and
