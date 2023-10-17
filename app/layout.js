@@ -17,7 +17,6 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <ToastContainer position='top-center' />
         <NavBar />
-        <SearchForm />
         {children}
       </body>
     </html>
