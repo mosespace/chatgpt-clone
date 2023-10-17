@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { IoMdSend } from "react-icons/io";
 import { useForm } from "react-hook-form";
 
-export default function SearchForm() {
+export default function SearchForm({ updatedData }) {
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit, reset } = useForm();
 
@@ -18,9 +18,14 @@ export default function SearchForm() {
         },
         body: JSON.stringify(data),
       });
-      console.log(response);
+      // console.log(response);
 
       if (response.ok) {
+        const resultJSON = await response.json();
+        const botData = JSON.parse(resultJSON.GptResponse);
+        // console.log(botData);
+        updatedData(botData)
+        // console.log(response)
         reset();
         setLoading(false);
       }

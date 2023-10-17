@@ -1,51 +1,31 @@
 "use client";
-import Link from "next/link";
 import Image from "next/image";
 import Logo from "../public/Logo.svg";
 import { FaLock } from "react-icons/fa";
+import React, { useState } from "react";
 import { ImPower } from "react-icons/im";
 import { GoPaste } from "react-icons/go";
 import { CiShare1 } from "react-icons/ci";
 import Profile from "../public/profile.jpg";
-import React, { useState } from "react";
 import { SlLike, SlDislike, SlShareAlt } from "react-icons/sl";
 import { BsFillInfoCircleFill, BsStars } from "react-icons/bs";
+import SearchForm from "./SearchForm";
 
 export default function Answers() {
   const [activeButton, setActiveButton] = useState(1);
-  const [responseData, setResponseData] = useState(null);
+  const [responseData, setResponseData] = useState();
 
-  // console.log(responseData);
-
-  const fetchData = async () => {
-    //   try {
-    //     const response = await fetch("http://localhost:3000/api/questions",
-    //     {
-    //       method: "POST",
-    //       body: JSON.stringify({}),
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //     });
-    //     if (response.ok) {
-    //       // const { data } = await response.json();
-    //       console.log(data);
-    //       setResponseData(data.result);
-    //     } else {
-    //       console.error("Failed to fetch questions from the API");
-    //     }
-    //   } catch (error) {
-    //     console.error("An error occurred while fetching questions:", error);
-    //   }
-  };
+  function updatedData(newData) {
+    setResponseData(newData);
+  }
 
   const handleButtonClick = (buttonNumber) => {
     setActiveButton(buttonNumber);
   };
-  fetchData();
 
   return (
     <>
+      <SearchForm updatedData={updatedData} />
       {responseData ? (
         <>
           {/*Response Section */}
@@ -66,7 +46,7 @@ export default function Answers() {
                 <Image src={Profile} alt='user-name using AI ChatGPT-4' />
               </div>
               <div className='text-left' style={{ flex: 1 }}>
-                <h2 className='text-left'>{responseData.text}</h2>
+                <h2 className='text-left'>{responseData.prompt}</h2>
               </div>
             </div>
 
@@ -78,7 +58,7 @@ export default function Answers() {
                 </div>
                 <div className='text-left' style={{ flex: 1 }}>
                   <h2 className='text-left text-[1rem] selection:bg-[#0071bc]/70 selection:text-white'>
-                    {responseData.message}
+                    {responseData.response}
                   </h2>
                 </div>
               </div>
