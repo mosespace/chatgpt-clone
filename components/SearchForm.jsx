@@ -5,31 +5,24 @@ import { IoMdSend } from "react-icons/io";
 import { useForm } from "react-hook-form";
 
 export default function SearchForm() {
-  // const [loading, setLoading] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    reset,
-    watch,
-    formState: { errors },
-  } = useForm();
+  const [loading, setLoading] = useState(false);
+  const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = async (data) => {
-    // console.log(data);
     try {
-      // setLoading(true);
-      const response = await fetch("http://localhost:3000/api/questions/", {
+      setLoading(true);
+      const response = await fetch(process.env.NEXT_PUBLIC_END_POINT_API, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
       });
-      reset;
+      console.log(response);
+
       if (response.ok) {
         reset();
-      } else {
-        console.log("Request failed with status code");
+        setLoading(false);
       }
     } catch (error) {
       console.log(
@@ -53,9 +46,13 @@ export default function SearchForm() {
                 placeholder='Send a message'
                 required
               />
-              <button type='submit'>
-                <IoMdSend size={25} className='text-gray-900/50' />
-              </button>
+              {loading ? (
+                <div>Loading....</div>
+              ) : (
+                <button type='submit'>
+                  <IoMdSend size={25} className='text-gray-900/50' />
+                </button>
+              )}
             </div>
           </form>
         </div>
