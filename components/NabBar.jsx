@@ -172,7 +172,10 @@ export default function NavBar() {
       </div>
 
       {/*Desktop Side Tab responsive Tab */}
-      <div className='hidden w-[20%] py-[1rem] px-[2rem] h-screen bg-[#225b9f] fixed lg:flex flex-col justify-normal z-50 top-0 left-0 text-white'>
+      <div
+        className='hidden w-[20%] py-[1rem] px-[2rem] h-screen bg-[#225b9f] fixed lg:flex flex-col justify-normal z-50 top-0 left-0 text-white'
+        style={{ overflowY: "auto", maxHeight: "100vh" }}
+      >
         <Link
           href='/'
           className='flex gap-4 items-center border-2 border-slate-300 py-3 px-2 font-semibold rounded-md'
@@ -184,13 +187,13 @@ export default function NavBar() {
           <div className='flex flex-col w-full'>
             {/*Today*/}
             <div className='mt-[1.6rem] mb-[1.rem] '>
-              <span className='font-bold text-white/60'>Today</span>
+              <span className='font-semibold text-white/60'>Today</span>
             </div>
             <div className='flex flex-col w-full'>
               <div className='mt-[1rem] flex items-center'>
                 <Link
-                  href='/'
-                  className='flex gap-4 items-center border-2 border-slate-300 py-3 px-2 w-full font-semibold rounded-md'
+                  href='/detailed'
+                  className='flex gap-4 items-center border-2 border-slate-300 py-3 px-2 w-full rounded-md'
                 >
                   <LuMessageSquare size={20} />
                   Resolve React Error Hand....
@@ -198,8 +201,8 @@ export default function NavBar() {
               </div>
               <div className='mt-[1rem] flex items-center'>
                 <Link
-                  href='/'
-                  className='flex gap-4 items-center border-2 border-slate-300 py-3 px-2 w-full font-semibold rounded-md'
+                  href='/detailed'
+                  className='flex gap-4 items-center border-2 border-slate-300 py-3 px-2 w-full rounded-md'
                 >
                   <LuMessageSquare size={20} />
                   Create HTML Emails Usin....
@@ -207,8 +210,8 @@ export default function NavBar() {
               </div>
               <div className='mt-[1rem] flex items-center'>
                 <Link
-                  href='/'
-                  className='flex gap-4 items-center border-2 border-slate-300 py-3 px-2 w-full font-semibold rounded-md'
+                  href='/detailed'
+                  className='flex gap-4 items-center border-2 border-slate-300 py-3 px-2 w-full rounded-md'
                 >
                   <LuMessageSquare size={20} />
                   Send Contact Form Ema....
@@ -216,8 +219,8 @@ export default function NavBar() {
               </div>
               <div className='mt-[1rem] flex items-center'>
                 <Link
-                  href='/'
-                  className='flex gap-4 items-center border-2 border-slate-300 py-3 px-2 w-full font-semibold rounded-md'
+                  href='/detailed'
+                  className='flex gap-4 items-center border-2 border-slate-300 py-3 px-2 w-full rounded-md'
                 >
                   <LuMessageSquare size={20} />
                   React Three.Js Setup
@@ -225,8 +228,8 @@ export default function NavBar() {
               </div>
               <div className='mt-[1rem] flex items-center'>
                 <Link
-                  href='/'
-                  className='flex gap-4 items-center border-2 border-slate-300 py-3 px-2 w-full font-semibold rounded-md'
+                  href='/detailed'
+                  className='flex gap-4 items-center border-2 border-slate-300 py-3 px-2 w-full rounded-md'
                 >
                   <LuMessageSquare size={20} />
                   Toggle Mobile Menu Co....
@@ -234,8 +237,8 @@ export default function NavBar() {
               </div>
               <div className='mt-[1rem] flex items-center'>
                 <Link
-                  href='/'
-                  className='flex gap-4 items-center border-2 border-slate-300 py-3 px-2 w-full font-semibold rounded-md'
+                  href='/detailed'
+                  className='flex gap-4 items-center border-2 border-slate-300 py-3 px-2 w-full rounded-md'
                 >
                   <LuMessageSquare size={20} />
                   Task: Summarize Conve....
@@ -245,13 +248,13 @@ export default function NavBar() {
 
             {/*Yesterday */}
             <div className=' pt-[1.6rem] mb-[1.rem]'>
-              <span className='font-bold text-white/60'>Yesterday</span>
+              <span className='font-semibold text-white/60'>Yesterday</span>
             </div>
             <div className='flex flex-col w-full'>
               <div className='mt-[1rem] flex items-center'>
                 <Link
-                  href='/'
-                  className='flex gap-4 items-center border-2 border-slate-300 py-3 px-2 w-full font-semibold rounded-md'
+                  href='/detailed'
+                  className='flex gap-4 items-center border-2 border-slate-300 py-3 px-2 w-full rounded-md'
                 >
                   <LuMessageSquare size={20} />
                   Toggle Mobile Menu Co....
@@ -259,8 +262,8 @@ export default function NavBar() {
               </div>
               <div className='mt-[1rem] flex items-center'>
                 <Link
-                  href='/'
-                  className='flex gap-4 items-center border-2 border-slate-300 py-3 px-2 w-full font-semibold rounded-md'
+                  href='/detailed'
+                  className='flex gap-4 items-center border-2 border-slate-300 py-3 px-2 w-full rounded-md'
                 >
                   <LuMessageSquare size={20} />
                   Task: Summarize Conve....

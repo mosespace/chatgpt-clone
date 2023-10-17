@@ -1,22 +1,59 @@
-import React from "react";
+"use client";
 import Link from "next/link";
+import React, { useState } from "react";
 import { IoMdSend } from "react-icons/io";
+import { useForm } from "react-hook-form";
 
 export default function SearchForm() {
+  // const [loading, setLoading] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    // console.log(data);
+    try {
+      // setLoading(true);
+      const response = await fetch("http://localhost:3000/api/questions/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      reset;
+      if (response.ok) {
+        reset();
+      } else {
+        console.log("Request failed with status code");
+      }
+    } catch (error) {
+      console.log(
+        "An error occurred while trying to send the contacts to the end-point",
+        error
+      );
+    }
+  };
+
   return (
     <>
       {/*Search option */}
       <div className='bg-gray-100 fixed bottom-0 left-0 right-0 lg:flex lg:items-center lg:flex-col lg:justify-center lg:ml-[20%] lg:w-[80%]'>
         <div className='px-[2rem] lg:px-0 lg:w-[50%]'>
-          <form action='submit'>
+          <form action='submit' onSubmit={handleSubmit(onSubmit)} method='POST'>
             <div className='mt-5 flex shadow-lg justify-between px-3 items-center border-2 bg-gray-200 text-gray-900 rounded-[.8rem]'>
               <input
-                className='w-full bg-gray-200 text-gray-900 p-3 focus:outline-none'
+                className='w-full focus:bg-transparent bg-transparent text-gray-900 p-3 focus:outline-none'
                 type='text'
+                {...register("text")}
                 placeholder='Send a message'
                 required
               />
-              <button>
+              <button type='submit'>
                 <IoMdSend size={25} className='text-gray-900/50' />
               </button>
             </div>
