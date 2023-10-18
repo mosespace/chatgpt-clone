@@ -29,7 +29,7 @@ export async function POST(request) {
     const result = await response.json();
     // console.log(result);
     const GptResponse = await JSON.parse(result.BOT);
-    console.log(GptResponse);
+    // console.log(GptResponse);
 
     return NextResponse.json({ GptResponse }, { status: 200 });
   } catch (error) {
