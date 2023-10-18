@@ -11,6 +11,8 @@ export default function SearchForm({ updatedData }) {
   const onSubmit = async (data) => {
     try {
       setLoading(true);
+      let botDataObject; // Declare the variable here
+
       const response = await fetch(process.env.NEXT_PUBLIC_END_POINT_API, {
         method: "POST",
         headers: {
@@ -18,22 +20,34 @@ export default function SearchForm({ updatedData }) {
         },
         body: JSON.stringify(data),
       });
-      // console.log(response);
 
       if (response.ok) {
-        const resultJSON = await response.json();
-        const botData = JSON.parse(resultJSON.GptResponse);
-        // console.log(botData);
-        updatedData(botData)
-        // console.log(response)
         reset();
         setLoading(false);
+        const resultJSON = await response.json();
+        const botData = JSON.parse(resultJSON.GptResponse);
+
+        botDataObject = {
+          prompt: botData.prompt,
+          response: botData.response,
+        };
+        updatedData(botDataObject);
+        console.log(botDataObject);
+
+        const res = await fetch("http://localhost:3000/api/chats", {
+          method: "POST",
+          header: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(botDataObject),
+        });
+        console.log(res);
+        if (res.ok) {
+          console.log("success");
+        }
       }
     } catch (error) {
-      console.log(
-        "An error occurred while trying to send the contacts to the end-point",
-        error
-      );
+      console.log(error);
     }
   };
 
