@@ -10,8 +10,8 @@ export async function POST(request) {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        "X-RapidAPI-Key": process.env.NEXT_PUBLIC_OPEN3_AI_KEY,
-        "X-RapidAPI-Host": process.env.NEXT_PUBLIC_OPEN3_AI_HOST,
+        "X-RapidAPI-Key": "420db4702emshc37f129eb468b84p1e2f50jsn7c6495919d06",
+        "X-RapidAPI-Host": process.env.NEXT_PUBLIC_OPEN4_AI_HOST,
       },
       body: JSON.stringify({
         messages: [
