@@ -1,7 +1,7 @@
 import "../styles/main.scss";
+import Form from "@/components/Form";
 import { Inter } from "next/font/google";
-import NavBar from "@/components/NabBar";
-import SearchForm from "@/components/SearchForm";
+import SideBar from "@/components/SideBar";
 import { ToastContainer } from "react-toastify";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -16,7 +16,8 @@ export default function RootLayout({ children }) {
     <html lang='en'>
       <body className={inter.className}>
         <ToastContainer position='top-center' />
-        <NavBar />
+        <SideBar />
+        <Form />
         {children}
       </body>
     </html>
