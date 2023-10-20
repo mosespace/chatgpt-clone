@@ -10,8 +10,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Bot {
-  id    Int     @id @default(autoincrement())
-  prompt String 
-  response  String
+model Chat {
+  id            Int     @id @default(autoincrement())
+  title         String 
+  conversation  Conversations[]
+}
+
+model Conversations {
+  id            Int     @id @default (autoincrement())
+  prompt        String
+  response      String
+  chatId        Int  
+  chatConv      Chat @relation(fields: [chatId], references:[id])
 }
