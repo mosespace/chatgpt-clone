@@ -1,17 +1,62 @@
 import db from "@/libs/db";
 import { NextResponse } from "next/server";
 
-export async function POST(request) {
+export async function GET() {
   try {
-    const { response, prompt } = await request.json();
-
-    const finalChat = await db.bot.create({
-      data: { prompt, response },
+    const chats = await db.chat.findMany({
+      include: {
+        conversation: true,
+      },
     });
-    console.log(finalChat);
-    return NextResponse.json(finalChat, {
+    // console.log(chats);
+
+    return NextResponse.json(chats, {
       status: 201,
     });
+  } catch (error) {
+    console.log(
+      "An Error occurred while trying to fetch chats from superbase db",
+      error
+    );
+    return NextResponse.json(
+      {
+        message: "Failed to get the chats",
+        error: error.message,
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+}
+
+export async function POST(request) {
+  try {
+    const { response, prompt, chatId } = await request.json();
+    // console.log(response, prompt, chatId);
+
+    if (chatId) {
+      const conversation = await db.conversations.create({
+        data: { prompt, response },
+      });
+      return NextResponse.json(conversation, {
+        status: 201,
+      });
+    } else {
+      const chat = await db.chat.create({
+        data: {
+          title: prompt,
+        },
+      });
+
+      const conversation = await db.conversations.create({
+        data: { prompt, response, chatId: chat.id },
+      });
+
+      return NextResponse.json(conversation, {
+        status: 201,
+      });
+    }
   } catch (error) {
     console.log(
       "An Error occurred while trying to add the question to the Superbase",
@@ -28,41 +73,3 @@ export async function POST(request) {
     );
   }
 }
-
-{
-  /* Creating A New Record We Use the Post and also === request */
-}
-
-// export async function POST(request) {
-//   try {
-//     const { names, phone, email, image } = await request.json();
-
-//     const data = {
-//       names,
-//       email,
-//       phone,
-//       image,
-//     };
-
-//     const new_contact = await db.contact.create({
-//       data,
-//     });
-//     // console.log(new_contact);
-
-//     return NextResponse.json(new_contact, { status: 201 });
-//   } catch (error) {
-//     console.log(
-//       "An Error occurred while trying to create the contact. Read more about it below",
-//       error
-//     );
-//     return NextResponse.json(
-//       {
-//         message: "Failure to create a contact",
-//         error: error.message,
-//       },
-//       {
-//         status: 500,
-//       }
-//     );
-//   }
-// }
