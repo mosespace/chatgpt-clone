@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { IoMdSend } from "react-icons/io";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 export default function Form() {
   const [loading, setLoading] = useState(false);
@@ -11,6 +12,8 @@ export default function Form() {
   // console.log(chatId);
 
   const { register, handleSubmit, reset } = useForm();
+
+  // const router = useRouter();
 
   const onSubmit = async (data) => {
     try {
@@ -43,7 +46,7 @@ export default function Form() {
             ...botData,
             chatId,
           };
-          const res = await fetch("http://localhost:3000/api/chats", {
+          const res = await fetch(process.env.NEXT_PUBLIC_END_POINT_DB, {
             method: "POST",
             header: {
               "Content-Type": "application/json",
@@ -52,7 +55,7 @@ export default function Form() {
           });
           // console.log(res);
         } else {
-          const res = await fetch("http://localhost:3000/api/chats", {
+          const res = await fetch(process.env.NEXT_PUBLIC_END_POINT_DB, {
             method: "POST",
             header: {
               "Content-Type": "application/json",
@@ -91,7 +94,10 @@ export default function Form() {
               {loading ? (
                 <div>Loading....</div>
               ) : (
-                <button type='submit'>
+                <button
+                  // onClick={() => router.push(`/c/${chatId}`)}
+                  type='submit'
+                >
                   <IoMdSend size={25} className='text-gray-900/50' />
                 </button>
               )}
