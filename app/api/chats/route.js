@@ -33,12 +33,14 @@ export async function GET() {
 export async function POST(request) {
   try {
     const { response, prompt, chatId } = await request.json();
-    // console.log(response, prompt, chatId);
+    console.log(typeof chatId);
 
     if (chatId) {
+      console.log(chatId);
       const conversation = await db.conversations.create({
-        data: { prompt, response },
+        data: { prompt, response, chatId },
       });
+      console.log(conversation);
       return NextResponse.json(conversation, {
         status: 201,
       });

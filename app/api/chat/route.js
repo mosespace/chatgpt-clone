@@ -5,19 +5,19 @@ export async function POST(request) {
     const { text } = await request.json();
     // console.log("Data received successfully", text);
 
-    const url = "https://open-ai21.p.rapidapi.com/conversationgpt35";
+    const url = "https://open-ai21.p.rapidapi.com/conversationmpt";
     const options = {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        "X-RapidAPI-Key": "420db4702emshc37f129eb468b84p1e2f50jsn7c6495919d06",
+        "X-RapidAPI-Key": "0aa9572ba4mshf3fbb9238d86836p12998ejsnaa9eecf8ed04",
         "X-RapidAPI-Host": process.env.NEXT_PUBLIC_OPEN4_AI_HOST,
       },
       body: JSON.stringify({
         messages: [
           {
             role: "user",
-            content: `For all the prompts that i will asking you, give me the response back in a JSON format as an object with keys: prompt and response. ${text}`,
+            content: `${text}`,
           },
         ],
         web_access: false,
@@ -28,7 +28,13 @@ export async function POST(request) {
     const response = await fetch(url, options);
     const result = await response.json();
     // console.log(result);
-    const GptResponse = await JSON.parse(result.BOT);
+    const finalResponse = result.MPT;
+    // console.log(finalResponse);
+
+    const GptResponse = {
+      prompt: text,
+      response: finalResponse,
+    };
     console.log(GptResponse);
 
     return NextResponse.json({ GptResponse }, { status: 200 });

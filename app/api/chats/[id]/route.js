@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
   /* Going to the single detailed page */
 }
 export async function GET(request, { params: { id } }) {
-  console.log(id);
+  // console.log(id);
   try {
     const chat = await db.chat.findUnique({
       where: { id: parseInt(id) },

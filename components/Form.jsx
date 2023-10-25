@@ -6,21 +6,19 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 
 export default function Form() {
+  const router= useRouter()
   const [loading, setLoading] = useState(false);
 
   const [chatId, setChatId] = useState(null);
-  // console.log(chatId);
+  console.log(chatId);
 
   const { register, handleSubmit, reset } = useForm();
-
-  // const router = useRouter();
 
   const onSubmit = async (data) => {
     try {
       setLoading(true);
-      let botDataObject;
-
-      const response = await fetch(process.env.NEXT_PUBLIC_END_POINT_API, {
+      let resultDataObject;
+      const response = await fetch("http://localhost:3000/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -29,47 +27,51 @@ export default function Form() {
       });
 
       if (response.ok) {
+        console.log(response);
         reset();
         setLoading(false);
         const resultJSON = await response.json();
-        const botData = JSON.parse(resultJSON.GptResponse);
-        // console.log(botData);
-
-        botDataObject = {
-          prompt: botData.prompt,
-          response: botData.response,
-          chatId: chatId,
+        const resultData = resultJSON.GptResponse;
+        resultDataObject = {
+          prompt: resultData.prompt,
+          response: resultData.response,
         };
-
         if (chatId) {
-          const conversationId = {
-            ...botData,
+          console.log("coming from the chatId")
+          const conversation = {
+            ...resultDataObject,
             chatId,
           };
-          const res = await fetch(process.env.NEXT_PUBLIC_END_POINT_DB, {
+          const response = await fetch("http://localhost:3000/api/chats", {
             method: "POST",
-            header: {
+            headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(conversationId),
+            body: JSON.stringify(conversation),
           });
-          // console.log(res);
+          if (response.ok) {
+            window.location.reload();
+          }
         } else {
-          const res = await fetch(process.env.NEXT_PUBLIC_END_POINT_DB, {
+          console.log("coming from the new chatId")
+
+          const res = await fetch("http://localhost:3000/api/chats", {
             method: "POST",
             header: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(botDataObject),
+            body: JSON.stringify(resultDataObject),
           });
           if (res.ok) {
+            console.log(res)
             const setting = await res.json();
             const settingChatId = setting.chatId;
+            console.log(settingChatId)
             setChatId(settingChatId);
+            router.push(`/c/${settingChatId}`);
+
           }
         }
-
-        // console.log(res);
       }
     } catch (error) {
       console.log(error);
