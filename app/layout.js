@@ -2,6 +2,7 @@ import "../styles/main.scss";
 import Form from "@/components/Form";
 import { Inter } from "next/font/google";
 import SideBar from "@/components/SideBar";
+import { ClerkProvider } from "@clerk/nextjs";
 import { ToastContainer } from "react-toastify";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -13,13 +14,15 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang='en'>
-      <body className={inter.className}>
-        <ToastContainer position='top-center' />
-        <SideBar />
-        <Form />
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang='en'>
+        <body className={inter.className}>
+          <ToastContainer position='top-center' />
+          <SideBar />
+          <Form />
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
