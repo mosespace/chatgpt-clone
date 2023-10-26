@@ -4,13 +4,17 @@ import React, { useState } from "react";
 import { IoMdSend } from "react-icons/io";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@clerk/nextjs";
 
 export default function Form() {
-  const router= useRouter()
+  const { userId } = useAuth();
+  // console.log(typeof userId);
+  const router = useRouter();
+
   const [loading, setLoading] = useState(false);
 
   const [chatId, setChatId] = useState(null);
-  console.log(chatId);
+  // console.log(chatId);
 
   const { register, handleSubmit, reset } = useForm();
 
@@ -35,25 +39,29 @@ export default function Form() {
         resultDataObject = {
           prompt: resultData.prompt,
           response: resultData.response,
+          userId,
         };
         if (chatId) {
-          console.log("coming from the chatId")
+          console.log("coming from the chatId");
           const conversation = {
             ...resultDataObject,
             chatId,
           };
-          const response = await fetch("http://localhost:3000/api/chats", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(conversation),
-          });
+          const response = await fetch(
+            `http://localhost:3000/api/chats/?${userId}`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(conversation),
+            }
+          );
           if (response.ok) {
             window.location.reload();
           }
         } else {
-          console.log("coming from the new chatId")
+          console.log("coming from the new chatId");
 
           const res = await fetch("http://localhost:3000/api/chats", {
             method: "POST",
@@ -63,13 +71,12 @@ export default function Form() {
             body: JSON.stringify(resultDataObject),
           });
           if (res.ok) {
-            console.log(res)
+            console.log(res);
             const setting = await res.json();
             const settingChatId = setting.chatId;
-            console.log(settingChatId)
+            console.log(settingChatId);
             setChatId(settingChatId);
             router.push(`/c/${settingChatId}`);
-
           }
         }
       }

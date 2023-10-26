@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -7,6 +8,7 @@ import Profile from "../public/profile.jpg";
 import { MdOutlineMoreHoriz } from "react-icons/md";
 
 export default function Chats({ chats }) {
+  // console.log(chats);
   return (
     <>
       {/*Desktop Side Tab responsive Tab */}

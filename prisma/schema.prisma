@@ -11,6 +11,7 @@ datasource db {
 }
 
 model Chat {
+  userId        String        
   id            Int     @id @default(autoincrement())
   title         String 
   conversation  Conversations[]
