@@ -1,9 +1,15 @@
 import db from "@/libs/db";
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(request, { searchParams }) {
   try {
+    const userId = request.nextUrl.searchParams.get("userId");
+    // console.log(userId);
+
     const chats = await db.chat.findMany({
+      where: {
+        userId: userId,
+      },
       include: {
         conversation: true,
       },
@@ -32,23 +38,19 @@ export async function GET() {
 
 export async function POST(request) {
   try {
-    const { response, prompt, chatId } = await request.json();
-    console.log(typeof chatId);
-
+    const { response, prompt, chatId, userId } = await request.json();
     if (chatId) {
       console.log(chatId);
       const conversation = await db.conversations.create({
         data: { prompt, response, chatId },
       });
-      console.log(conversation);
+      // console.log(conversation);
       return NextResponse.json(conversation, {
         status: 201,
       });
     } else {
       const chat = await db.chat.create({
-        data: {
-          title: prompt,
-        },
+        data: { title: prompt, userId: userId },
       });
 
       const conversation = await db.conversations.create({
