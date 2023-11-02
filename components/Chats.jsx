@@ -1,13 +1,14 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { useUser } from "@clerk/nextjs";
 import { RxPerson } from "react-icons/rx";
 import { BsPlusLg } from "react-icons/bs";
-import Profile from "../public/profile.jpg";
+import { UserButton } from "@clerk/nextjs";
 import { MdOutlineMoreHoriz } from "react-icons/md";
 
 export default function Chats({ chats }) {
+  const { user } = useUser();
   // console.log(chats);
   return (
     <>
@@ -30,7 +31,6 @@ export default function Chats({ chats }) {
               <span className='font-semibold text-white/60'>Today</span>
             </div>
             {chats?.map((chat, id) => {
-              // const newChatId = chat.id + "-" + randomNumber;
               return (
                 <>
                   <div className='flex flex-col w-full' key={id}>
@@ -48,7 +48,7 @@ export default function Chats({ chats }) {
               );
             })}
           </div>
-          {/* <div className='px-[2rem] py-[1rem] flex gap-4 flex-col justify-center w-full absolute bottom-0'>
+          <div className='px-[2rem] py-[1rem] flex gap-4 flex-col justify-center w-full absolute z-50 bottom-0'>
             <Link
               href='/'
               className='flex gap-4 items-center border-t-2 border-gray-100 py-3 px-2 w-full rounded-md'
@@ -57,17 +57,15 @@ export default function Chats({ chats }) {
               Upgrade to Plus
             </Link>
             <div className='flex gap-4 items-center w-full'>
-              <div className='relative w-[30px] h-[30px]'>
-                <Image src={Profile} alt='AI ChatGPT-4' />
-              </div>
-              <div className='flex justify-between w-full font-semibold'>
-                <span>Kisakye Moses</span>
+              <UserButton afterSignOutUrl='/' />
+              <div className='flex justify-between w-full'>
+                <span>{user?.fullName}</span>
                 <button>
                   <MdOutlineMoreHoriz size={20} />
                 </button>
               </div>
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
     </>
