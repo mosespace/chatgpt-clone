@@ -18,9 +18,16 @@ export default function RootLayout({ children }) {
       <html lang='en'>
         <body className={inter.className}>
           <ToastContainer position='top-center' />
-          <SideBar />
+
           <Form />
-          {children}
+          <div className='flex relative w-full h-full'>
+            <div className='bg-red-700'>
+              <SideBar />
+            </div>
+            <div className='bg-green-700 h-screen flex justify-center w-full ml-[18%]'>
+              {children}
+            </div>
+          </div>
         </body>
       </html>
     </ClerkProvider>
