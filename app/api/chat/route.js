@@ -35,7 +35,7 @@ export async function POST(request) {
       prompt: text,
       response: finalResponse,
     };
-    console.log(GptResponse);
+    // console.log(GptResponse);
 
     return NextResponse.json({ GptResponse }, { status: 200 });
   } catch (error) {

@@ -40,7 +40,7 @@ export async function POST(request) {
   try {
     const { response, prompt, chatId, userId } = await request.json();
     if (chatId) {
-      console.log(chatId);
+      // console.log(chatId);
       const conversation = await db.conversations.create({
         data: { prompt, response, chatId },
       });
