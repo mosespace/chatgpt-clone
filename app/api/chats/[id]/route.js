@@ -13,7 +13,6 @@ export async function GET(request, { params: { id } }) {
       },
     });
     // console.log(chat);
-    // console.log(id);
 
     if (!chat) {
       return NextResponse.json(
