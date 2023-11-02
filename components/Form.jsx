@@ -31,7 +31,7 @@ export default function Form() {
       });
 
       if (response.ok) {
-        console.log(response);
+        // console.log(response);
         reset();
         setLoading(false);
         const resultJSON = await response.json();
@@ -42,7 +42,7 @@ export default function Form() {
           userId,
         };
         if (chatId) {
-          console.log("coming from the chatId");
+          // console.log("coming from the chatId");
           const conversation = {
             ...resultDataObject,
             chatId,
@@ -61,7 +61,7 @@ export default function Form() {
             window.location.reload();
           }
         } else {
-          console.log("coming from the new chatId");
+          // console.log("coming from the new chatId");
 
           const res = await fetch("http://localhost:3000/api/chats", {
             method: "POST",
@@ -71,10 +71,10 @@ export default function Form() {
             body: JSON.stringify(resultDataObject),
           });
           if (res.ok) {
-            console.log(res);
+            // console.log(res);
             const setting = await res.json();
             const settingChatId = setting.chatId;
-            console.log(settingChatId);
+            // console.log(settingChatId);
             setChatId(settingChatId);
             router.push(`/c/${settingChatId}`);
           }
@@ -89,12 +89,12 @@ export default function Form() {
   return (
     <>
       {/*Search option */}
-      <div className='bg-gray-100 fixed bottom-0 left-0 right-0 lg:flex lg:items-center lg:flex-col lg:justify-center lg:ml-[20%] lg:w-[80%]'>
+      <div className='fixed bottom-0 left-0 right-0 z-50 lg:flex lg:items-center lg:flex-col lg:justify-center lg:ml-[20%] lg:w-[80%]'>
         <div className='px-[2rem] lg:px-0 lg:w-[50%]'>
-          <form action='submit' onSubmit={handleSubmit(onSubmit)} method='POST'>
-            <div className='mt-5 flex shadow-lg justify-between px-3 items-center border-2 bg-gray-200 text-gray-900 rounded-[.8rem]'>
-              <input
-                className='w-full focus:bg-transparent bg-transparent text-gray-900 p-3 focus:outline-none'
+          {/* <form action='submit' onSubmit={handleSubmit(onSubmit)} method='POST'>
+            <div className='mt-5 flex shadow-2xl justify-between px-2 items-center border-2 bg-[#40414F] text-white rounded-[.8rem]'>
+              <textarea
+                className='w-full bg-transparent text-white/80 py-3 bg-green-700 focus:outline-none'
                 type='text'
                 {...register("text")}
                 placeholder='Send a message'
@@ -111,10 +111,99 @@ export default function Form() {
                 </button>
               )}
             </div>
+          </form> */}
+
+          <form action='submit' onSubmit={handleSubmit(onSubmit)} method='POST'>
+            <label for='chat' className='sr-only'>
+              Send a message
+            </label>
+            <div className='flex items-center px-3 py-[1.2rem] rounded-xl bg-[#40414F] shadow-lg'>
+              <button
+                type='button'
+                className='inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600'
+              >
+                <svg
+                  className='w-5 h-5'
+                  aria-hidden='true'
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 20 18'
+                >
+                  <path
+                    fill='currentColor'
+                    d='M13 5.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0ZM7.565 7.423 4.5 14h11.518l-2.516-3.71L11 13 7.565 7.423Z'
+                  />
+                  <path
+                    stroke='currentColor'
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                    stroke-width='2'
+                    d='M18 1H2a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1Z'
+                  />
+                  <path
+                    stroke='currentColor'
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                    stroke-width='2'
+                    d='M13 5.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0ZM7.565 7.423 4.5 14h11.518l-2.516-3.71L11 13 7.565 7.423Z'
+                  />
+                </svg>
+                <span className='sr-only'>Upload image</span>
+              </button>
+              <button
+                type='button'
+                className='p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600'
+              >
+                <svg
+                  className='w-5 h-5'
+                  aria-hidden='true'
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 20 20'
+                >
+                  <path
+                    stroke='currentColor'
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                    stroke-width='2'
+                    d='M13.408 7.5h.01m-6.876 0h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM4.6 11a5.5 5.5 0 0 0 10.81 0H4.6Z'
+                  />
+                </svg>
+                <span className='sr-only'>Add emoji</span>
+              </button>
+              <textarea
+                id='chat'
+                rows='1'
+                {...register("text")}
+                required
+                className='block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg focus:ring-[#40414F] focus:border-[#40414F] dark:bg-[#40414F] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 focus:outline-none dark:focus:border-blue-500'
+                placeholder='Send a message'
+              ></textarea>
+
+              {loading ? (
+                <div>Loading....</div>
+              ) : (
+                <button
+                  onClick={() => router.push(`/c/${chatId}`)}
+                  type='submit'
+                  className='inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600'
+                >
+                  <svg
+                    className='w-5 h-5 rotate-90'
+                    aria-hidden='true'
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='currentColor'
+                    viewBox='0 0 18 20'
+                  >
+                    <path d='m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8 18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 1 0 0 0 1.156-1.376Z' />
+                  </svg>
+                </button>
+              )}
+            </div>
           </form>
         </div>
 
-        <footer className='text-gray-600 body-font'>
+        <footer className='text-white/80 body-font'>
           <div className=''>
             <div className='container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row'>
               <p className='lg:hidden text-gray-500 text-sm text-center sm:text-left'>

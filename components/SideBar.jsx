@@ -1,30 +1,24 @@
 import React from "react";
-import Chats from "./Chats";
-import ShowNav from "./ShowNav";
+import DesktopNav from "./DesktopNav";
+import MobileNav from "./MobileNav";
 import getAllChats from "@/libs/getAllChats";
 import { auth } from "@clerk/nextjs";
 
 export default async function SideBar() {
   const { userId } = auth();
   const chats = await getAllChats(userId);
-  // console.log(chats);
+  // console.log(userId);
 
-  // const handleNewChatClick = () => {
-  //   // Perform any actions related to creating a new chat
-
-  //   // Reload the page to reflect the changes
-  //   window.location.reload();
-  // };
   return (
     <>
-      {/*Mobile Side Tab responsive Tab */}
+      {/* Mobile Side Tab responsive Tab */}
       <div>
-        <ShowNav chats={chats} />
+        <MobileNav chats={chats} />
       </div>
 
       {/*Desktop Side Tab responsive Tab */}
-      <div>
-        <Chats chats={chats} />
+      <div className='w-full'>
+        <DesktopNav chats={chats} />
       </div>
     </>
   );

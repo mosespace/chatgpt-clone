@@ -3,7 +3,7 @@ import Image from "next/image";
 import Btns from "./homeBtns/Btns";
 import Logo from "../public/Logo.svg";
 
-export default function Answers() {
+export default function Intro() {
   return (
     <>
       <div className='mx-[.3rem] lg:mx-0'>

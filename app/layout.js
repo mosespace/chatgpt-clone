@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
             <div className='bg-red-700'>
               <SideBar />
             </div>
-            <div className='h-screen flex justify-center w-full ml-[18%]'>
+            <div className='h-screen flex justify-center w-full lg:ml-[18%]'>
               {children}
             </div>
           </div>
