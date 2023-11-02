@@ -7,7 +7,6 @@ export default function ButtonMenu() {
 
   function handleOnClick() {
     setShowNav(true);
-    // console.log(setShowNav);
   }
 
   return (
