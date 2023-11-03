@@ -16,13 +16,15 @@ export default function Form() {
   const [chatId, setChatId] = useState(null);
   // console.log(chatId);
 
+  const chatsEndPoint = process.env.NEXT_PUBLIC_END_POINT_DB;
+
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = async (data) => {
     try {
       setLoading(true);
       let resultDataObject;
-      const response = await fetch("http://localhost:3000/api/chat", {
+      const response = await fetch(process.env.NEXT_PUBLIC_CHAT_END_POINT, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,23 +49,20 @@ export default function Form() {
             ...resultDataObject,
             chatId,
           };
-          const response = await fetch(
-            `http://localhost:3000/api/chats/?${userId}`,
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(conversation),
-            }
-          );
+          const response = await fetch(`${chatsEndPoint}/?${userId}`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(conversation),
+          });
           if (response.ok) {
             window.location.reload();
           }
         } else {
           // console.log("coming from the new chatId");
 
-          const res = await fetch("http://localhost:3000/api/chats", {
+          const res = await fetch(process.env.NEXT_PUBLIC_END_POINT_DB, {
             method: "POST",
             header: {
               "Content-Type": "application/json",
