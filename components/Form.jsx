@@ -73,9 +73,10 @@ export default function Form() {
             // console.log(res);
             const setting = await res.json();
             const settingChatId = setting.chatId;
+            const baseUrl = process.env.NEXT_PUBLIC_LOCALHOST;
             // console.log(settingChatId);
             setChatId(settingChatId);
-            router.push(`/c/${settingChatId}`);
+            router.push(`${baseUrl}/c/${settingChatId}`);
           }
         }
       }
