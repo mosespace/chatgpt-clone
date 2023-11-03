@@ -30,23 +30,25 @@ export default function DesktopNav({ chats }) {
             <div className='mt-[1.6rem] mb-[1.rem] '>
               <span className='font-semibold text-white/60'>Today</span>
             </div>
-            {chats?.map((chat, id) => {
-              return (
-                <>
-                  <div className='flex flex-col w-full' key={id}>
-                    <div className='mt-[1rem] flex items-center'>
-                      <Link
-                        href={`/c/${chat.id}`}
-                        className='flex gap-4 items-center border-2 border-slate-300 py-3 px-2 w-full rounded-md'
-                      >
-                        {/* <LuMessageSquare size={20} /> */}
-                        {chat.title}
-                      </Link>
-                    </div>
-                  </div>
-                </>
-              );
-            })}
+            {chats.length > 0
+              ? chats?.map((chat, id) => {
+                  return (
+                    <>
+                      <div className='flex flex-col w-full' key={id}>
+                        <div className='mt-[1rem] flex items-center'>
+                          <Link
+                            href={`/c/${chat.id}`}
+                            className='flex gap-4 items-center border-2 border-slate-300 py-3 px-2 w-full rounded-md'
+                          >
+                            {/* <LuMessageSquare size={20} /> */}
+                            {chat.title}
+                          </Link>
+                        </div>
+                      </div>
+                    </>
+                  );
+                })
+              : ""}
           </div>
           <div className='px-[2rem] py-[1rem] flex gap-4 flex-col justify-center w-full absolute z-50 bottom-0'>
             <Link
