@@ -5,12 +5,12 @@ export async function POST(request) {
     const { text } = await request.json();
     // console.log("Data received successfully", text);
 
-    const url = "https://open-ai21.p.rapidapi.com/conversationmpt";
+    const url = process.env.NEXT_PUBLIC_OPEN4_AI_URL;
     const options = {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        "X-RapidAPI-Key": "0aa9572ba4mshf3fbb9238d86836p12998ejsnaa9eecf8ed04",
+        "X-RapidAPI-Key": process.env.NEXT_PUBLIC_OPEN4_AI_KEY,
         "X-RapidAPI-Host": process.env.NEXT_PUBLIC_OPEN4_AI_HOST,
       },
       body: JSON.stringify({
@@ -35,7 +35,7 @@ export async function POST(request) {
       prompt: text,
       response: finalResponse,
     };
-    // console.log(GptResponse);
+    console.log(GptResponse);
 
     return NextResponse.json({ GptResponse }, { status: 200 });
   } catch (error) {
