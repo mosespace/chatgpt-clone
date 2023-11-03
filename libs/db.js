@@ -1,0 +1,6 @@
+import { PrismaClient } from "@prisma/client";
+
+const db = globalThis.prisma || new PrismaClient();
+if (process.env.DATABASE_URL !== "production") globalThis.prisma = db;
+
+export default db;

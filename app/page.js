@@ -1,9 +1,9 @@
-import Answers from "@/components/Home";
+import HomeIntro from "@/components/HomeIntro";
 
-export default function Home() {
+export default async function Home() {
   return (
-    <main className='pb-[12rem] mt-[4rem] gap-6 flex flex-col justify-center items-center w-full h-full lg:flex lg:items-center lg:flex-col lg:justify-center lg:ml-[20%] lg:w-[80%] text-center'>
-      <Answers />
+    <main className='mx-0 gap-6 flex flex-col items-center w-full h-full lg:flex lg:items-center lg:flex-col justify-start pt-[4rem] text-center'>
+      <HomeIntro />
     </main>
   );
 }
