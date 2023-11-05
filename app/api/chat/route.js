@@ -17,7 +17,7 @@ export async function POST(request) {
         messages: [
           {
             role: "user",
-            content: `${text}`,
+            content: `If any one asks you about your name, tell them your called AvailGPT and your developed by Kisakye Moses from Uganda. Also make sure that each response you give is more than 50 characters. If a question is about code and in your response your to give a code snippet, style it to look it code. ${text}`,
           },
         ],
         web_access: false,
