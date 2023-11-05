@@ -57,8 +57,8 @@ export default function MobileNav({ chats }) {
                   </div>
                   {chats?.map((chat, id) => {
                     return (
-                      <>
-                        <div className='flex flex-col w-full' key={id}>
+                      <div key={id}>
+                        <div className='flex flex-col w-full'>
                           <div className='mt-[1rem] flex items-center'>
                             <Link
                               href={`/c/${chat.id}`}
@@ -69,7 +69,7 @@ export default function MobileNav({ chats }) {
                             </Link>
                           </div>
                         </div>
-                      </>
+                      </div>
                     );
                   })}
                   <div className='py-[1rem] flex gap-4 flex-col justify-center w-[290px] absolute z-50 bottom-0'>
