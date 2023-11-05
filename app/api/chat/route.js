@@ -3,15 +3,15 @@ import { NextResponse } from "next/server";
 export async function POST(request) {
   try {
     const { text } = await request.json();
-    // console.log("Data received successfully", text);
+    console.log("Data received successfully", text);
 
-    const url = process.env.NEXT_PUBLIC_OPEN4_AI_URL;
+    const url = "https://open-ai21.p.rapidapi.com/conversationmpt";
     const options = {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        "X-RapidAPI-Key": process.env.NEXT_PUBLIC_OPEN4_AI_KEY,
-        "X-RapidAPI-Host": process.env.NEXT_PUBLIC_OPEN4_AI_HOST,
+        "X-RapidAPI-Key": "224b9a932fmshe389b43f756ebd1p18ab51jsnebd144e92ef3",
+        "X-RapidAPI-Host": "open-ai21.p.rapidapi.com",
       },
       body: JSON.stringify({
         messages: [
@@ -21,7 +21,7 @@ export async function POST(request) {
           },
         ],
         web_access: false,
-        stream: false,
+        // stream: false,
       }),
     };
 
@@ -29,7 +29,7 @@ export async function POST(request) {
     const result = await response.json();
     // console.log(result);
     const finalResponse = result.MPT;
-    // console.log(finalResponse);
+    console.log(finalResponse);
 
     const GptResponse = {
       prompt: text,
