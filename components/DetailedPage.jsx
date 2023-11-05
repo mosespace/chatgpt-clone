@@ -8,7 +8,6 @@ import { CiShare1 } from "react-icons/ci";
 import { SlLike, SlDislike } from "react-icons/sl";
 
 export default function Answers({ singleChat }) {
-  console.log(singleChat.length);
   const { user, isLoaded } = useUser();
   if (!isLoaded) {
     return null;
