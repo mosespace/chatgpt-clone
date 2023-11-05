@@ -32,8 +32,8 @@ export default function DesktopNav({ chats }) {
             </div>
             {chats?.map((chat, id) => {
               return (
-                <>
-                  <div className='flex flex-col w-full' key={id}>
+                <div key={id}>
+                  <div className='flex flex-col w-full'>
                     <div className='mt-[1rem] flex items-center'>
                       <Link
                         href={`/c/${chat.id}`}
@@ -44,7 +44,7 @@ export default function DesktopNav({ chats }) {
                       </Link>
                     </div>
                   </div>
-                </>
+                </div>
               );
             })}
           </div>
