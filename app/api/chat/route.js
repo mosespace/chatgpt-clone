@@ -17,7 +17,7 @@ export async function POST(request) {
         messages: [
           {
             role: "user",
-            content: `If any one asks you about your name, tell them your called AvailGPT and your developed by Kisakye Moses from Uganda. Also make sure that each response you give is more than 50 characters. If a question is about code and in your response your to give a code snippet, style it to look it code. ${text}`,
+            content: `If any one asks you about your name, tell them your called AvailGPT and your developed by Kisakye Moses from Uganda. Also make sure that each response you give is more than 50 characters. ${text}`,
           },
         ],
         web_access: false,
@@ -29,13 +29,13 @@ export async function POST(request) {
     const result = await response.json();
     // console.log(result);
     const finalResponse = result.MPT;
-    console.log(finalResponse);
+    // console.log(finalResponse);
 
     const GptResponse = {
       prompt: text,
       response: finalResponse,
     };
-    console.log(GptResponse);
+    // console.log(GptResponse);
 
     return NextResponse.json({ GptResponse }, { status: 200 });
   } catch (error) {
