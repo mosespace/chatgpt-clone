@@ -1,8 +1,8 @@
 import React from "react";
-import DesktopNav from "./DesktopNav";
 import MobileNav from "./MobileNav";
-import getAllChats from "@/libs/getAllChats";
 import { auth } from "@clerk/nextjs";
+import DesktopNav from "./DesktopNav";
+import getAllChats from "@/libs/getAllChats";
 
 export default async function SideBar() {
   const { userId } = auth();

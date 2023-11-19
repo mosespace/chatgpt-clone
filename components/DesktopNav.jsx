@@ -14,7 +14,7 @@ export default function DesktopNav({ chats }) {
     <>
       {/*Desktop Side Tab responsive Tab */}
       <div
-        className='hidden w-[18%] py-[1rem] px-[2rem] h-full bg-[#202123] fixed lg:flex flex-col justify-normal z-50 top-0 left-0 text-white overflow-auto'
+        className='hidden w-[18%] py-[1rem] px-[2rem] h-full bg-black fixed lg:flex flex-col justify-normal z-50 top-0 left-0 text-white overflow-auto'
         // style={{ overflowY: "auto" }}
       >
         <Link

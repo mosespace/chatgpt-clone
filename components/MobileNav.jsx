@@ -22,7 +22,7 @@ export default function MobileNav({ chats }) {
   }
   return (
     <>
-      <div className='bg-[#343541] lg:bg-[#202123] py-[1rem] px-[2rem] lg:hidden fixed top-0 right-0 left-0 z-50'>
+      <div className='bg-[#343541] lg:bg-black py-[1rem] px-[2rem] lg:hidden fixed top-0 right-0 left-0 z-50'>
         <div className='flex justify-between text-white'>
           <button onClick={handleOnClick}>
             <FiMenu size={25} />
@@ -38,7 +38,7 @@ export default function MobileNav({ chats }) {
             {/*Mobile responsive Tab */}
             <div className='absolute flex justify-between z-50 backdrop-blur-sm bg-white/10 w-full top-0 left-0 text-white lg:hidden'>
               <div
-                className='w-[75%] py-[1rem] px-[1rem]  h-screen bg-[#202123]'
+                className='w-[75%] py-[1rem] px-[1rem]  h-screen bg-black'
                 style={{ overflowY: "auto", maxHeight: "100vh" }}
               >
                 <Link
