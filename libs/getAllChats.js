@@ -4,7 +4,11 @@ export default async function getAllChats(userId) {
     cache: "no-store",
   });
 
+  if (!response.ok) {
+    console.error(`Error: ${response.status} - ${response.statusText}`);
+    return null;
+  }
+
   const chats = await response.json();
-  // console.log(chats);
   return chats;
 }
