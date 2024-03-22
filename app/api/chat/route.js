@@ -3,15 +3,15 @@ import { NextResponse } from "next/server";
 export async function POST(request) {
   try {
     const { text } = await request.json();
-    console.log("Data received successfully", text);
+    // console.log("Data received successfully", text);
 
-    const url = process.env.NEXT_PUBLIC_OPEN4_AI_URL;
+    const url = process.env.NEXT_PUBLIC_OPEN3_AI_URL;
     const options = {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        "X-RapidAPI-Key": process.env.NEXT_PUBLIC_OPEN4_AI_KEY,
-        "X-RapidAPI-Host": process.env.NEXT_PUBLIC_OPEN4_AI_HOST,
+        "X-RapidAPI-Key": process.env.NEXT_PUBLIC_OPEN3_AI_KEY,
+        "X-RapidAPI-Host": process.env.NEXT_PUBLIC_OPEN3_AI_HOST,
       },
       body: JSON.stringify({
         messages: [
@@ -35,7 +35,7 @@ export async function POST(request) {
       prompt: text,
       response: finalResponse,
     };
-    // console.log(GptResponse);
+    console.log(GptResponse);
 
     return NextResponse.json({ GptResponse }, { status: 200 });
   } catch (error) {

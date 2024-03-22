@@ -39,12 +39,18 @@ export async function GET(request, { searchParams }) {
 export async function POST(request) {
   try {
     const { response, prompt, chatId, userId } = await request.json();
+
+    // Handle the case where response is not provided
+    const data = { prompt, chatId };
+    if (response) {
+      data.response = response;
+    }
+
     if (chatId) {
-      // console.log(chatId);
       const conversation = await db.conversations.create({
-        data: { prompt, response, chatId },
+        data,
       });
-      // console.log(conversation);
+
       return NextResponse.json(conversation, {
         status: 201,
       });
@@ -54,7 +60,7 @@ export async function POST(request) {
       });
 
       const conversation = await db.conversations.create({
-        data: { prompt, response, chatId: chat.id },
+        data: { ...data, chatId: chat.id },
       });
 
       return NextResponse.json(conversation, {
@@ -77,3 +83,4 @@ export async function POST(request) {
     );
   }
 }
+
